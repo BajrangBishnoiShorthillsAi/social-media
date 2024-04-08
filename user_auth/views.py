@@ -13,12 +13,12 @@ from rest_framework.exceptions import APIException
 def register_user(request):
     if request.method == 'POST':
         try:
-            serializer = UserSerializer(data=request.data)
+            serializer = UserSerializer(data=request.data, partial =True)
             serializer.is_valid(raise_exception=True)
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         except APIException as e:
-            print(e)
+            print("Exception:")
     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # @api_view(['POST'])
